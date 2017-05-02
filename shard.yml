@@ -1,0 +1,9 @@
+name: katip
+version: 0.1.0
+
+authors:
+  - Güven Cenan Güvenal <guvencenan@gmail.com>
+
+crystal: 0.21.1
+
+license: MIT
