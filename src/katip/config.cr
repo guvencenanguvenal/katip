@@ -1,10 +1,10 @@
 module Katip
   class Config
-    @@loglevel = LogLevel::ALL.value
+    class_property loglevel = LogLevel::ALL
 
-    @@dateformat = "dd\mm\yyyy"
-    @@logclassification = LogClassification::DATE_DAY.value
+    class_property dateformat = "dd\mm\yyyy"
+    class_property logclassification : Int32 = LogClassification::DATE_DAY.value
 
-    @@path = "./src/katip/logfiles"
+    class_property path = "src/katipdeneme/logfiles"
   end
 end

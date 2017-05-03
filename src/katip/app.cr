@@ -1,5 +1,5 @@
 require "file"
-require "fileutils"
+require "file_utils"
 
 module Katip
   class App
@@ -19,9 +19,9 @@ module Katip
     #
     ###
     def debug_logger(text : String, obj_class = Object.class, ex = Exception.new("Not Init"))
-      if Config.loglevel < LogLevel::DEBUG.value
+      if Config.loglevel.value < LogLevel::DEBUG.value
         # :TODO
-        @appender.log(obj_class, text, ex)
+        @appender.log(obj_class, text, ex, LogLevel::DEBUG)
       end
     end
 
@@ -30,9 +30,9 @@ module Katip
     #
     ###
     def info_logger(text : String, obj_class = Object.class, ex = Exception.new("Not Init"))
-      if Config.loglevel < LogLevel::INFO.value
+      if Config.loglevel.value < LogLevel::INFO.value
         # :TODO
-        @appender.log(obj_class, text, ex)
+        @appender.log(obj_class, text, ex, LogLevel::INFO)
       end
     end
 
@@ -41,9 +41,9 @@ module Katip
     #
     ###
     def warn_logger(text : String, obj_class = Object.class, ex = Exception.new("Not Init"))
-      if Config.loglevel < LogLevel::WARN.value
+      if Config.loglevel.value < LogLevel::WARN.value
         # :TODO
-        @appender.log(obj_class, text, ex)
+        @appender.log(obj_class, text, ex, LogLevel::WARN)
       end
     end
 
@@ -52,9 +52,9 @@ module Katip
     #
     ###
     def error_logger(text : String, obj_class = Object.class, ex = Exception.new("Not Init"))
-      if Config.loglevel < LogLevel::ERROR.value
+      if Config.loglevel.value < LogLevel::ERROR.value
         # :TODO
-        @appender.log(obj_class, text, ex)
+        @appender.log(obj_class, text, ex, LogLevel::ERROR)
       end
     end
 
@@ -63,9 +63,9 @@ module Katip
     #
     ###
     def fatal_logger(text : String, obj_class = Object.class, ex = Exception.new("Not Init"))
-      if Config.loglevel < LogLevel::FATAL.value
+      if Config.loglevel.value < LogLevel::FATAL.value
         # :TODO
-        @appender.log(obj_class, text, ex)
+        @appender.log(obj_class, text, ex, LogLevel::FATAL)
       end
     end
   end

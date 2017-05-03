@@ -15,11 +15,7 @@ module Katip
             Core::Engine.add_error_log_json("#{Config.path}/#{Time.now.year}-#{Time.now.month}-#{Time.now.day}|#{Time.now.hour}:00.json", Core::Engine.create_log_json(obj_class, text, ex, loglevel))
           end
         elsif Config.logclassification == LogClassification::DATE_DAY.value
-          if File.file?("#{Config.path}/#{Time.now.year}-#{Time.now.month}-#{Time.now.day}.json")
-            File.write("#{Config.path}/#{Time.now.year}-#{Time.now.month}-#{Time.now.day}.json", Core::Engine.init_log())
-          else
             Core::Engine.add_error_log_json("#{Config.path}/#{Time.now.year}-#{Time.now.month}-#{Time.now.day}.json", Core::Engine.create_log_json(obj_class, text, ex, loglevel))
-          end
         elsif Config.logclassification == LogClassification::DATE_MONTH.value
           if File.file?("#{Config.path}/#{Time.now.year}-#{Time.now.month}-01.json")
             File.write("#{Config.path}/#{Time.now.year}-#{Time.now.month}-01.json", Core::Engine.init_log())

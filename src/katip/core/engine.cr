@@ -9,15 +9,22 @@ module Katip
       end
 
       def self.add_error_log_json(filename : String, json : String)
-        _file_io = File.read(filename)
-        _file_io.rchop("}}")
-        File.write(filename, _file_io + json)
+        if !File.file?(filename)
+          File.write(filename, Core::Engine.init_log())
+          _file_io = File.read(filename)
+          _file_io = _file_io.rchop("}}")
+          File.write(filename, _file_io + json + "}}}")
+        else
+          _file_io = File.read(filename)
+          _file_io = _file_io.rchop("}}")
+          File.write(filename, _file_io + "," + json + "}}}")
+        end
       end
 
       def self.create_log_json(obj_class : Object.class, text : String, ex : Exception, loglevel : LogLevel) : String
         _log_level = ""
         
-        case loglevel
+        case loglevel.value
         when LogLevel::ALL.value
           _log_level = "ALL"
         when LogLevel::DEBUG.value
@@ -30,10 +37,10 @@ module Katip
           _log_level = "ERROR"
         when LogLevel::FATAL.value
           _log_level = "FATAL"
+        end
 
-        "\"#{Time.now.year}-#{Time.now.month}-#{Time.now.day}|#{Time.now.hour}:#{Time.now.minute}:#{Time.now.second}\":{\"class\":\"#{obj_class}\", \"message\":\"#{text}\", \"exception_type\":\"#{ex.class}\", \"exception_message\":\"#{ex.message}\", \"log_level\":\"#{_log_level}\"}"
+        "\"#{Time.now.year}-#{Time.now.month}-#{Time.now.day}|#{Time.now.hour}:#{Time.now.minute}:#{Time.now.second}\":{\"class\":\"#{obj_class}\", \"message\":\"#{text}\", \"exception_type\":\"#{ex.class}\", \"exception_message\":\"#{ex.message}\", \"log_level\":\"#{_log_level}\""
       end
-
     end
   end
 end
