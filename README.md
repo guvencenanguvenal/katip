@@ -1,4 +1,4 @@
-<img src="https://cloud.githubusercontent.com/assets/11555504/25776661/675cef36-32cd-11e7-9ab8-14a2a7228198.png" width="50" height="75" />
+<img src="https://cloud.githubusercontent.com/assets/11555504/25776661/675cef36-32cd-11e7-9ab8-14a2a7228198.png" width="50" height="50" />
 
 # katip
 
