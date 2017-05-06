@@ -18,11 +18,52 @@ dependencies:
 require "katip"
 ```
 
-TODO: Write usage instructions here
+Create your logger variable and configure it.
 
-## Development
+```crystal
+logger = Katip::Logger.new
 
-TODO: Write development instructions here
+logger.configure do |config|
+	config.loglevel = Katip::LogLevel::DEBUG
+	config.classification = Katip::LogClassification::DATE_DAY
+	config.path = "src/katip/logfiles"
+end
+```
+
+And log it!
+
+```crystal
+logger.debug("Debug mode is on!")
+
+logger.info("Information! This is log.")
+
+logger.warn("Warning! Please control your code.")
+
+logger.error("Error! Please fix and re-compile it!")
+
+logger.fatal("Fatal! OH NO!")
+```
+
+## JSON Output
+
+```json
+{
+    "katip":"0.1.0",
+    "info":{
+        "description":"",
+        "project":"",
+        "version":""},
+    "errors":{
+        "636297026976169160":{
+            "date":"2017-05-07 00:24:57 +0300", 
+            "class":"Class", 
+            "message":"Debug mode is on!", 
+            "exception_type":"Katip::NotSetException", 
+            "exception_message":"Not Init", 
+            "log_level":"DEBUG"}
+    }
+}
+```
 
 ## Contributing
 
