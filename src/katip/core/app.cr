@@ -1,6 +1,3 @@
-require "file"
-require "file_utils"
-
 module Katip
   module Core
     class App
@@ -23,6 +20,17 @@ module Katip
             FileUtils.mkdir(_file_path_next)
           end
         end
+
+        rescue ex
+          puts "********************************************************"
+          puts "Error until create directory please control your path!"
+          puts "Path format must be;"
+          puts "dir1/dir2/dir3..."
+          puts "Your path is"
+          puts @config.path
+          puts "--------------------------------------------------------"
+          puts ex.message
+          puts "********************************************************"
       end
 
       def initialize(@config : Config)
@@ -46,6 +54,13 @@ module Katip
           # :TODO
           @appender.log(obj_class, text, ex, LogLevel::DEBUG)
         end
+
+        rescue CanNotLogException
+          puts "********************************************************"
+          puts "Directories is created again!"
+          init_app
+          puts "Create is done!"
+          puts "********************************************************"
       end
 
       ###
@@ -57,6 +72,13 @@ module Katip
           # :TODO
           @appender.log(obj_class, text, ex, LogLevel::INFO)
         end
+
+        rescue CanNotLogException
+          puts "********************************************************"
+          puts "Directories is created again!"
+          init_app
+          puts "Create is done!"
+          puts "********************************************************"
       end
 
       ###
@@ -68,6 +90,13 @@ module Katip
           # :TODO
           @appender.log(obj_class, text, ex, LogLevel::WARN)
         end
+
+        rescue CanNotLogException
+          puts "********************************************************"
+          puts "Directories is created again!"
+          init_app
+          puts "Create is done!"
+          puts "********************************************************"
       end
 
       ###
@@ -79,6 +108,13 @@ module Katip
           # :TODO
           @appender.log(obj_class, text, ex, LogLevel::ERROR)
         end
+
+        rescue CanNotLogException
+          puts "********************************************************"
+          puts "Directories is created again!"
+          init_app
+          puts "Create is done!"
+          puts "********************************************************"
       end
 
       ###
@@ -90,6 +126,13 @@ module Katip
           # :TODO
           @appender.log(obj_class, text, ex, LogLevel::FATAL)
         end
+
+        rescue CanNotLogException
+          puts "********************************************************"
+          puts "Directories is created again!"
+          init_app
+          puts "Create is done!"
+          puts "********************************************************"
       end
     end
   end

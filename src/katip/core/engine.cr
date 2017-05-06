@@ -1,6 +1,3 @@
-require "json"
-require "file"
-
 module Katip
   module Core
     class Engine
@@ -19,6 +16,15 @@ module Katip
           _file_io = _file_io.rchop("}}")
           File.write(filename, _file_io + "," + json + "}}}")
         end
+
+        rescue
+          puts "********************************************************"
+          puts "Error! I can not create your log file!"
+          puts "Please control your path!"
+          puts "--- Another trick;"
+          puts "Log file may already open or may use anoter program!"
+          puts "********************************************************"
+          raise CanNotLogException.new
       end
 
       def self.create_log_json(obj_class : Object.class, text : String, ex : Exception, loglevel : LogLevel) : String
@@ -39,7 +45,7 @@ module Katip
           _log_level = "FATAL"
         end
 
-    "\"#{Time.utc_ticks}\":{\"date\":\"#{Time.now}\", \"class\":\"#{obj_class}\", \"message\":\"#{text}\", \"exception_type\":\"#{ex.class}\", \"exception_message\":\"#{ex.message}\", \"log_level\":\"#{_log_level}\""
+        "\"#{Time.utc_ticks}\":{\"date\":\"#{Time.now}\", \"class\":\"#{obj_class}\", \"message\":\"#{text}\", \"exception_type\":\"#{ex.class}\", \"exception_message\":\"#{ex.message}\", \"log_level\":\"#{_log_level}\""
       end
     end
   end

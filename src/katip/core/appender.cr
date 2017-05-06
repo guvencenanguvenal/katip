@@ -20,6 +20,13 @@ module Katip
         elsif @config.logclassification == LogClassification::CLASS.value
             Core::Engine.add_error_log_json("#{@config.path}/#{obj_class}.json", Core::Engine.create_log_json(obj_class, text, ex, loglevel))
         end
+
+        rescue CanNotLogException
+            raise CanNotLogException.new
+        rescue Exception
+            puts "********************************************************"
+            puts "I am finding unknown Exception! Please create issue on https://github.com/guvencenanguvenal/katip/issues"
+            puts "********************************************************"
       end
     end
   end
