@@ -35,7 +35,7 @@ logger.configure do |config|
 end
 ```
 
-And log it!
+And basic log it!
 
 ```crystal
 logger.debug("Debug mode is on!")
@@ -47,6 +47,20 @@ logger.warn("Warning! Please control your code.")
 logger.error("Error! Please fix and re-compile it!")
 
 logger.fatal("Fatal! OH NO!")
+```
+
+if you want log detail, you can use this methods.
+
+```crystal
+logger.debug("Debug mode is on!", self, YourExceptionName)
+
+logger.info("Information! This is log.", self, YourExceptionName)
+
+logger.warn("Warning! Please control your code.", self, YourExceptionName)
+
+logger.error("Error! Please fix and re-compile it!", self, YourExceptionName)
+
+logger.fatal("Fatal! OH NO!", self, YourExceptionName)
 ```
 
 ## JSON Output
