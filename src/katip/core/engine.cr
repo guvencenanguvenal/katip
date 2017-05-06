@@ -1,13 +1,9 @@
 module Katip
   module Core
     class Engine
-      def self.init_log() : String
-        "{\"katip\":\"#{VERSION}\",\"info\":{\"description\":\"\",\"project\":\"\",\"version\":\"\"},\"errors\":{}}"
-      end
-
-      def self.add_error_log_json(filename : String, json : String)
+      def self.add_error_log_json(filename : String, json_init_info : String, json : String)
         if !File.file?(filename)
-          File.write(filename, Core::Engine.init_log())
+          File.write(filename, json_init_info)
           _file_io = File.read(filename)
           _file_io = _file_io.rchop("}}")
           File.write(filename, _file_io + json + "}}}")
