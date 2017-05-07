@@ -88,6 +88,23 @@ Please do not edit manuel JSON log files!
 }
 ```
 
+## View Your Logs
+
+You can use katipviewer.html to control your logs.
+
+Open katipviewer.html on local machine.
+
+<img src="https://cloud.githubusercontent.com/assets/11555504/25783981/0f728870-336e-11e7-85e2-f815f6c523e9.png" width="650" height="450" />
+
+Choose your log json file.
+
+<img src="https://cloud.githubusercontent.com/assets/11555504/25783983/12f79936-336e-11e7-8e13-995e61a394ff.png" width="650" height="450" />
+
+Click Read JSON Log button.
+
+<img src="https://cloud.githubusercontent.com/assets/11555504/25783982/10eea904-336e-11e7-9f2d-e5889ef64701.png" width="650" height="450" />
+
+
 ## Contributing
 
 1. Fork it ( https://github.com/guvencenanguvenal/katip/fork )
