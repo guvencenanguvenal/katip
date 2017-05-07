@@ -2,7 +2,7 @@ module Katip
   module Core
     class Appender
       def initialize(@config : Config)
-        @json_init_info = "{\"katip\":\"#{VERSION}\",\"info\":{\"description\":\"#{@config.info.description}\",\"project\":\"#{@config.info.project}\",\"version\":\"#{@config.info.version}\"},\"errors\":{}}"
+        @json_init_info = "{\"katip\":\"#{VERSION}\",\"info\":{\"description\":\"#{@config.info.description}\",\"project\":\"#{@config.info.project}\",\"version\":\"#{@config.info.version}\"},\"errors\":[]}"
       end 
 
       def log(obj_class : Object.class, text : String, ex : Exception, loglevel : LogLevel)

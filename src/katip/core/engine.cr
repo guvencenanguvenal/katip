@@ -5,12 +5,12 @@ module Katip
         if !File.file?(filename)
           File.write(filename, json_init_info)
           _file_io = File.read(filename)
-          _file_io = _file_io.rchop("}}")
-          File.write(filename, _file_io + json + "}}}")
+          _file_io = _file_io.rchop("]}")
+          File.write(filename, _file_io + json + "}]}")
         else
           _file_io = File.read(filename)
-          _file_io = _file_io.rchop("}}")
-          File.write(filename, _file_io + "," + json + "}}}")
+          _file_io = _file_io.rchop("]}")
+          File.write(filename, _file_io + "," + json + "}]}")
         end
 
         rescue
@@ -41,7 +41,7 @@ module Katip
           _log_level = "FATAL"
         end
 
-        "\"#{Time.utc_ticks}\":{\"date\":\"#{Time.now}\", \"class\":\"#{obj_class}\", \"message\":\"#{text}\", \"exception_type\":\"#{ex.class}\", \"exception_message\":\"#{ex.message}\", \"log_level\":\"#{_log_level}\""
+        "{\"date\":\"#{Time.now}\", \"class\":\"#{obj_class}\", \"message\":\"#{text}\", \"exception_type\":\"#{ex.class}\", \"exception_message\":\"#{ex.message}\", \"log_level\":\"#{_log_level}\""
       end
     end
   end
