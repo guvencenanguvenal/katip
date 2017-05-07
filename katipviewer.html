@@ -1,0 +1,163 @@
+<html>
+    <head>
+        
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+        
+        <script>
+            function readSingleFile(e) {
+              var file = e.target.files[0];
+              if (!file) {
+                return;
+              }
+              var reader = new FileReader();
+              reader.onload = function(e) {
+                var contents = e.target.result;
+                displayContents(contents);
+              };
+              reader.readAsText(file);
+            }
+
+            function displayContents(contents) {
+              var element = document.getElementById('file-content');
+              element.innerHTML = contents;
+            }
+            
+            window.onload = function() {
+                var file_input = document.getElementById('file-input');
+                
+                if(file_input)
+                {
+                    file_input.addEventListener('change', readSingleFile, false)
+                    
+                    var json_file = document.getElementById('file-content').innerHTML
+                    
+                    
+                }
+            }
+            
+            function loadJson(){
+                var content = document.getElementById('file-content');
+                var json_parse = document.getElementById('jsonParse');
+                var panel_heading = document.getElementById('panel_heading');
+                var panel_body = document.getElementById('panel_body');
+                
+                var debug = document.getElementById('debug_p');
+                var warn = document.getElementById('warn_p');
+                var info = document.getElementById('info_p');
+                var error = document.getElementById('error_p');
+                var fatal = document.getElementById('fatal_p');
+
+                if (content){
+                    if (content.innerHTML != ""){
+                        myJsonObj = JSON.parse(content.innerHTML);
+                        panel_heading.innerHTML = "Katip Version : " + myJsonObj.katip;
+                        panel_body.innerHTML = "Description : " + myJsonObj.info.description + "<br \>";
+                        panel_body.innerHTML += "Project : " + myJsonObj.info.project + "<br \>";
+                        panel_body.innerHTML += "Version : " + myJsonObj.info.version + "<br \>";
+                        debugger;
+                        for (var i = myJsonObj.errors.length - 1 ; i >= 0; i--) {
+                            if (myJsonObj.errors[i].log_level == "DEBUG"){
+                                debug.innerHTML += '<div class="panel panel-primary"><div class="panel-heading">' + myJsonObj.errors[i].date + '</div><div class="panel-body"><b>Message</b> : ' + myJsonObj.errors[i].message + '<br \> <b>Exception</b> : ' + myJsonObj.errors[i].exception_type + ' <br \> <b>Exception Message</b> : ' + myJsonObj.errors[i].exception_message + '</div><div class="panel-footer">' + myJsonObj.errors[i].class + '</div></div>'; 
+                            }
+                            else if (myJsonObj.errors[i].log_level == "WARN"){
+                                warn.innerHTML += '<div class="panel panel-warning"><div class="panel-heading">' + myJsonObj.errors[i].date + '</div><div class="panel-body"><b>Message</b> : ' + myJsonObj.errors[i].message + '<br \> <b>Exception</b> : ' + myJsonObj.errors[i].exception_type + ' <br \> <b>Exception Message</b> : ' + myJsonObj.errors[i].exception_message + '</div><div class="panel-footer">' + myJsonObj.errors[i].class + '</div></div>'; 
+                            }
+                            else if (myJsonObj.errors[i].log_level == "INFO"){
+                                info.innerHTML += '<div class="panel panel-default"><div class="panel-heading">' + myJsonObj.errors[i].date + '</div><div class="panel-body"><b>Message</b> : ' + myJsonObj.errors[i].message + '<br \> <b>Exception</b> : ' + myJsonObj.errors[i].exception_type + ' <br \> <b>Exception Message</b> : ' + myJsonObj.errors[i].exception_message + '</div><div class="panel-footer">' + myJsonObj.errors[i].class + '</div></div>'; 
+                            }
+                            else if (myJsonObj.errors[i].log_level == "ERROR"){
+                                error.innerHTML += '<div class="panel panel-danger"><div class="panel-heading">' + myJsonObj.errors[i].date + '</div><div class="panel-body"><b>Message</b> : ' + myJsonObj.errors[i].message + '<br \> <b>Exception</b> : ' + myJsonObj.errors[i].exception_type + ' <br \> <b>Exception Message</b> : ' + myJsonObj.errors[i].exception_message + '</div><div class="panel-footer">' + myJsonObj.errors[i].class + '</div></div>'; 
+                            }
+                            else if (myJsonObj.errors[i].log_level == "FATAL"){
+                                fatal.innerHTML += '<div class="panel panel-danger"><div class="panel-heading">' + myJsonObj.errors[i].date + '</div><div class="panel-body"><b>Message</b> : ' + myJsonObj.errors[i].message + '<br \> <b>Exception</b> : ' + myJsonObj.errors[i].exception_type + ' <br \> <b>Exception Message</b> : ' + myJsonObj.errors[i].exception_message + '</div><div class="panel-footer">' + myJsonObj.errors[i].class + '</div></div>'; 
+                            }
+                        }
+                    }
+                    else{
+                        json_parse.innerHTML = '<div class="alert alert-danger" role="alert">JSON is not open!</div>'
+                    }
+                     
+                }
+            }
+        </script>
+    </head>
+    <body>
+        <div class="container">
+            <div class="col-md-12">
+                <h3><img src="https://cloud.githubusercontent.com/assets/11555504/25776661/675cef36-32cd-11e7-9ab8-14a2a7228198.png" width="50" height="50" /><p><b>Katip</b> JSON Log Viewer</p></h3>
+            </div>
+            <hr />
+            <div class="row">
+                <div class="col-md-4"></div>
+                <div class="col-md-4">
+                    <div class="input-group">
+                        <input type="file" class="form-control" id="file-input" />
+                    </div>
+                </div>
+                <div class="col-md-4"></div>
+            </div>
+            <hr />
+            <div class="row">
+                <div class="col-md-2"></div>
+                <div class="col-md-8">
+                    <h3>Contents of the file:</h3>
+                    <pre id="file-content"></pre>
+                </div>
+                <div class="col-md-2"></div>
+            </div>
+            <hr />
+            <div class="row">
+                <div class="col-md-4">
+                    <button type="button" class="btn btn-primary" onclick="loadJson();" >Read JSON Log</button>
+                </div>
+                <div class="col-md-8"></div>
+            </div>
+            <hr />
+            <div class="row">
+                <div class="panel panel-default">
+                  <div class="panel-heading" id="panel_heading">Katip</div>
+                  <div class="panel-body" id="panel_body">
+                    
+                  </div>
+            </div>
+            <hr />
+            <div class="row">
+                <div class="col-md-12">
+                    <ul class="nav nav-tabs">
+                        <li class="active"><a data-toggle="tab" href="#debug">Debug</a></li>
+                        <li><a data-toggle="tab" href="#info">Information</a></li>
+                        <li><a data-toggle="tab" href="#warn">Warning</a></li>
+                        <li><a data-toggle="tab" href="#error">Error</a></li>
+                        <li><a data-toggle="tab" href="#fatal">Fatal</a></li>
+                    </ul>
+                    <div class="tab-content">
+                      <div id="debug" class="tab-pane fade in active">
+                        <h3>DEBUG</h3>
+                        <p id="debug_p"></p>
+                      </div>
+                      <div id="info" class="tab-pane fade">
+                        <h3>INFO</h3>
+                        <p id="info_p"></p>
+                      </div>
+                      <div id="warn" class="tab-pane fade">
+                        <h3>WARNING</h3>
+                        <p id="warn_p"></p>
+                      </div>
+                        <div id="error" class="tab-pane fade">
+                        <h3>ERROR</h3>
+                        <p id="error_p"></p>
+                      </div>
+                        <div id="fatal" class="tab-pane fade">
+                        <h3>FATAL</h3>
+                        <p id="fatal_p"></p>
+                      </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </body>
+</html>
+
+
