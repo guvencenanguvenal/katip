@@ -76,15 +76,15 @@ Please do not edit manuel JSON log files!
         "description":"",
         "project":"",
         "version":""},
-    "errors":{
-        "636297026976169160":{
-            "date":"2017-05-07 00:24:57 +0300", 
+    "errors":[
+    	   { "date":"2017-05-07 00:24:57 +0300", 
             "class":"Class", 
             "message":"Debug mode is on!", 
             "exception_type":"Katip::NotSetException", 
             "exception_message":"Not Init", 
-            "log_level":"DEBUG"}
-    }
+            "log_level":"DEBUG"
+	    }
+    ]
 }
 ```
 
