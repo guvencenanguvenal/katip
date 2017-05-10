@@ -12,6 +12,15 @@ module Katip
             file.print("," + json + "}]}")
           end
         end
+
+        rescue
+          puts "********************************************************"
+          puts "Error! I can not create your log file!"
+          puts "Please control your path!"
+          puts "--- Another trick;"
+          puts "Log file may already open or may use anoter program!"
+          puts "********************************************************"
+          raise CanNotLogException.new
       end
 
       def self.create_log_json(obj_class : Object.class, text : String, ex : Exception, loglevel : LogLevel) : String
