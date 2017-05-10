@@ -3,24 +3,15 @@ module Katip
     class Engine
       def self.add_error_log_json(filename : String, json_init_info : String, json : String)
         if !File.file?(filename)
-          File.write(filename, json_init_info)
-          _file_io = File.read(filename)
-          _file_io = _file_io.rchop("]}")
-          File.write(filename, _file_io + json + "}]}")
+          File.open(filename, "w+") do |file|
+            file.print(json_init_info + json + "}]}")
+          end
         else
-          _file_io = File.read(filename)
-          _file_io = _file_io.rchop("]}")
-          File.write(filename, _file_io + "," + json + "}]}")
+          File.open(filename, "r+") do |file|
+            file.seek(-2, IO::Seek::End)
+            file.print(json + "}]}")
+          end
         end
-
-        rescue
-          puts "********************************************************"
-          puts "Error! I can not create your log file!"
-          puts "Please control your path!"
-          puts "--- Another trick;"
-          puts "Log file may already open or may use anoter program!"
-          puts "********************************************************"
-          raise CanNotLogException.new
       end
 
       def self.create_log_json(obj_class : Object.class, text : String, ex : Exception, loglevel : LogLevel) : String

@@ -2,13 +2,10 @@ require "file"
 
 class File
   def self.append(filename : String, text : String)
-    _file_io = File.read(filename)
-    File.write(filename, _file_io + text)
-  end
-
-  def self.json_append(filename : String, json : String)
-    _file_io = File.read(filename)
-    File.write(filename, _file_io.rchop + text)
+    File.open(filename, "r+") do |file|
+      file.seek(0, IO::Seek::End)
+      file.print(text)
+    end
   end
 end
 

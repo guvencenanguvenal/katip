@@ -2,7 +2,7 @@ module Katip
   module Core
     class Appender
       def initialize(@config : Config)
-        @json_init_info = "{\"katip\":\"#{VERSION}\",\"info\":{\"description\":\"#{@config.info.description}\",\"project\":\"#{@config.info.project}\",\"version\":\"#{@config.info.version}\"},\"errors\":[]}"
+        @json_init_info = "{\"katip\":\"#{VERSION}\",\"info\":{\"description\":\"#{@config.info.description}\",\"project\":\"#{@config.info.project}\",\"version\":\"#{@config.info.version}\"},\"errors\":["
       end 
 
       def log(obj_class : Object.class, text : String, ex : Exception, loglevel : LogLevel)
@@ -21,13 +21,6 @@ module Katip
         elsif @config.logclassification.value == LogClassification::CLASS.value
             Core::Engine.add_error_log_json("#{@config.path}/#{obj_class}.json", @json_init_info, Core::Engine.create_log_json(obj_class, text, ex, loglevel))
         end
-
-        rescue CanNotLogException
-            raise CanNotLogException.new
-        rescue Exception
-            puts "********************************************************"
-            puts "I am finding unknown Exception! Please create issue on https://github.com/guvencenanguvenal/katip/issues"
-            puts "********************************************************"
       end
     end
   end
