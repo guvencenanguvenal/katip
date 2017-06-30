@@ -4,12 +4,12 @@ module Katip
       def self.add_error_log_json(filename : String, json_init_info : String, json : String)
         if !File.file?(filename)
           File.open(filename, "w+") do |file|
-            file.print(json_init_info + json + "}]}")
+            file.print(json_init_info + json + "]}")
           end
         else
           File.open(filename, "r+") do |file|
             file.seek(-2, IO::Seek::End)
-            file.print("," + json + "}]}")
+            file.print("," + json + "]}")
           end
         end
 
@@ -41,7 +41,7 @@ module Katip
           _log_level = "FATAL"
         end
 
-        "{\"date\":\"#{Time.now}\", \"class\":\"#{obj_class}\", \"message\":\"#{text}\", \"exception_type\":\"#{ex.class}\", \"exception_message\":\"#{ex.message}\", \"log_level\":\"#{_log_level}\""
+        "{\"date\":\"#{Time.now}\", \"class\":\"#{obj_class}\", \"message\":\"#{text}\", \"exception_type\":\"#{ex.class}\", \"exception_message\":\"#{ex.message}\", \"log_level\":\"#{_log_level}\"}"
       end
     end
   end
