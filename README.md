@@ -67,7 +67,7 @@ logger.fatal("Fatal! OH NO!", self, YourExceptionName)
 
 ## JSON Output
 
-Please do not edit manuel JSON log files! 
+Please do not edit manual JSON log files! 
 
 ```json
 {
