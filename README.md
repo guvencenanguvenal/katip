@@ -27,7 +27,7 @@ logger = Katip::Logger.new
 
 logger.configure do |config|
 	config.loglevel = Katip::LogLevel::DEBUG
-	config.classification = Katip::LogClassification::DATE_DAY
+	config.logclassification = Katip::LogClassification::DATE_DAY
 	config.path = "src/katip/logfiles"
 	
 	#### if you want to fill project's information
