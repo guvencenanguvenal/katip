@@ -7,13 +7,13 @@ module Katip
 
       def log(obj_class : Object.class, text : String, ex : Exception, loglevel : LogLevel)
         if @config.logclassification.value == LogClassification::DATE_DAY.value
-            Core::Engine.add_error_log_json("#{@config.path}/#{Time.now.year}-#{Time.now.month}-#{Time.now.day}.json", @json_init_info, Core::Engine.create_log_json(obj_class, text, ex, loglevel))
+            Core::Engine.add_error_log_json("#{@config.path}/#{Time.local.year}-#{Time.local.month}-#{Time.local.day}.json", @json_init_info, Core::Engine.create_log_json(obj_class, text, ex, loglevel))
         elsif @config.logclassification.value == LogClassification::DATE_MINUTES.value
-            Core::Engine.add_error_log_json("#{@config.path}/#{Time.now.year}-#{Time.now.month}-#{Time.now.day}|#{Time.now.hour}:#{Time.now.minute}.json", @json_init_info, Core::Engine.create_log_json(obj_class, text, ex, loglevel))
+            Core::Engine.add_error_log_json("#{@config.path}/#{Time.local.year}-#{Time.local.month}-#{Time.local.day}|#{Time.local.hour}:#{Time.local.minute}.json", @json_init_info, Core::Engine.create_log_json(obj_class, text, ex, loglevel))
         elsif @config.logclassification.value == LogClassification::DATE_HOUR.value
-            Core::Engine.add_error_log_json("#{@config.path}/#{Time.now.year}-#{Time.now.month}-#{Time.now.day}|#{Time.now.hour}:00.json", @json_init_info, Core::Engine.create_log_json(obj_class, text, ex, loglevel))
+            Core::Engine.add_error_log_json("#{@config.path}/#{Time.local.year}-#{Time.local.month}-#{Time.local.day}|#{Time.local.hour}:00.json", @json_init_info, Core::Engine.create_log_json(obj_class, text, ex, loglevel))
         elsif @config.logclassification.value == LogClassification::DATE_MONTH.value
-            Core::Engine.add_error_log_json("#{@config.path}/#{Time.now.year}-#{Time.now.month}-01.json", @json_init_info, Core::Engine.create_log_json(obj_class, text, ex, loglevel))
+            Core::Engine.add_error_log_json("#{@config.path}/#{Time.local.year}-#{Time.local.month}-01.json", @json_init_info, Core::Engine.create_log_json(obj_class, text, ex, loglevel))
         elsif @config.logclassification.value == LogClassification::LOGLEVEL.value
             Core::Engine.add_error_log_json("#{@config.path}/#{loglevel}.json", @json_init_info, Core::Engine.create_log_json(obj_class, text, ex, loglevel))
         elsif @config.logclassification.value == LogClassification::EXCEPTION.value

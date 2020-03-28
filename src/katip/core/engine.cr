@@ -41,7 +41,7 @@ module Katip
           _log_level = "FATAL"
         end
 
-        "{\"date\":\"#{Time.now}\", \"class\":\"#{obj_class}\", \"message\":\"#{text}\", \"exception_type\":\"#{ex.class}\", \"exception_message\":\"#{ex.message}\", \"log_level\":\"#{_log_level}\"}"
+        "{\"date\":\"#{Time.local}\", \"class\":\"#{obj_class}\", \"message\":\"#{text}\", \"exception_type\":\"#{ex.class}\", \"exception_message\":\"#{ex.message}\", \"log_level\":\"#{_log_level}\"}"
       end
     end
   end
